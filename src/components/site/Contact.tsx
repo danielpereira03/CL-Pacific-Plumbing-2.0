@@ -8,14 +8,36 @@ import { toast } from "sonner";
 
 export function Contact() {
   const [submitting, setSubmitting] = useState(false);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    // Paste your Web3Forms access key here
+    formData.append("access_key", "2c9044ff-cd86-48d7-89e2-f3913c2ec0e9");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        form.reset();
+        toast.success("Bid request received. We'll respond within one business day.");
+      } else {
+        toast.error("Failed to send bid request. Please try again.");
+      }
+    } catch {
+      toast.error("An error occurred. Please check your connection and try again.");
+    } finally {
       setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      toast.success("Bid request received. We'll respond within one business day.");
-    }, 600);
+    }
   };
 
   return (
@@ -32,24 +54,24 @@ export function Contact() {
             <div className="grid sm:grid-cols-2 gap-5">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" required placeholder="John Doe" />
+                <Input id="name" name="name" required placeholder="John Doe" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company">Company</Label>
-                <Input id="company" required placeholder="ABC General Contractors" />
+                <Input id="company" name="company" required placeholder="ABC General Contractors" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" required placeholder="estimating@abcgc.com" />
+                <Input id="email" name="email" type="email" required placeholder="estimating@abcgc.com" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone</Label>
-                <Input id="phone" type="tel" required placeholder="(404) 555-0100" />
+                <Input id="phone" name="phone" type="tel" required placeholder="(404) 555-0100" />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="project">Project Details / Bid Specs</Label>
-              <Textarea id="project" required rows={6} placeholder="Project name, location, square footage, bid due date, link to plans, scope of work needed..." />
+              <Textarea id="project" name="project_details" required rows={6} placeholder="Project name, location, square footage, bid due date, link to plans, scope of work needed..." />
             </div>
             <Button type="submit" disabled={submitting} size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
               {submitting ? "Sending..." : "Submit Bid Request"}

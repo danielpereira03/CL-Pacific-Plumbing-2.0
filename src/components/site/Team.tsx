@@ -16,12 +16,9 @@ export function Team() {
           <div className="text-xs uppercase tracking-widest text-accent font-semibold">About CL Pacific</div>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-primary">Built for Commercial. Backed by Experience.</h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            CL Pacific, LLC is a dedicated commercial plumbing subcontractor headquartered in Norcross, Georgia. Founded to fill the gap between oversized national contractors and undersized residential outfits, we exist to be the responsive, well-priced subcontractor that general contractors and developers can rely on for serious commercial work.
+            CL Pacific, LLC is a dedicated commercial plumbing contractor headquartered in Norcross, Georgia. Founded to fill the gap between oversized national contractors and undersized residential outfits, we exist to be the responsive, well-priced subcontractor that general contractors and developers can rely on for serious commercial work.
           </p>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            {/* PLACEHOLDER — replace with specific company history, founding story, ownership background */}
-            <span className="italic">[Insert company history paragraph here: founding date, ownership background, prior project experience, and what differentiates the CL Pacific team from competing subcontractors.]</span>
-          </p>
+          
           <ul className="mt-8 space-y-3">
             {points.map((p) => (
               <li key={p} className="flex gap-3 text-sm text-foreground">
@@ -36,7 +33,7 @@ export function Team() {
             <img src={teamImg} alt="CL Pacific commercial plumbing project — interior risers" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 to-transparent p-4">
               <div className="text-[10px] uppercase tracking-wider text-primary-foreground/70">On-site</div>
-              <div className="text-sm font-semibold text-primary-foreground">[Replace with leadership / crew photo]</div>
+              <div className="text-sm font-semibold text-primary-foreground"></div>
             </div>
           </div>
         </div>
